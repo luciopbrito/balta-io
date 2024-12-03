@@ -1,0 +1,47 @@
+name: Workflow for allowing PR on features/about-cqrs branch
+
+on:
+  pull-request:
+    branches: 
+      - 'features/about-cqrs'
+  push:
+    branches:
+      - 'features/about-cqrs'
+  
+jobs:
+  run-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup .NET on Ubuntu
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+      - name: Show Dotnet version on Ubuntu
+        run: dotnet --version
+      - name: Build Solution on Ubuntu
+        working-directory: 'ShopTestCQRS'
+        run: dotnet build ./ShopTestCQRS.sln
+  run-on-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Setup .NET on Windows
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+      - name: Show Dotnet version on Windows
+        run: dotnet --version
+      - name: Build Solution on Windows
+        working-directory: 'ShopTestCQRS'
+        run: dotnet build ./ShopTestCQRS.sln
+  run-on-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Setup .NET on MacOS
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+      - name: Show Dotnet version on MacOS
+        run: dotnet --version
+      - name: Build Solution on MacOS
+        working-directory: 'ShopTestCQRS'
+        run: dotnet build ./ShopTestCQRS.sln
